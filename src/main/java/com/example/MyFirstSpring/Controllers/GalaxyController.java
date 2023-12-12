@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import com.example.MyFirstSpring.repository.GalaxyRepository;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GalaxyController {
@@ -23,6 +25,24 @@ public class GalaxyController {
     public String showGalaxies(Model model) {
         List<Galaxy> galaxies = galaxyRepository.findAll();
         model.addAttribute("galaxies", galaxies);
-        return "galaxy-list";
+        return "show/galaxy-list";
     }
+
+    @GetMapping("/galaxies/add")
+    public String showAddGalaxyForm(Model model) {
+        model.addAttribute("newGalaxy", new Galaxy());
+        return "add/galaxy-add";
+    }
+
+    @ModelAttribute("newGalaxy")
+    public Galaxy getNewGalaxy() {
+        return new Galaxy();
+    }
+
+    @PostMapping("/galaxies/add")
+    public String addGalaxy(@ModelAttribute Galaxy galaxy) {
+        galaxyRepository.save(galaxy);
+        return "redirect:/galaxies";
+    }
+
 }

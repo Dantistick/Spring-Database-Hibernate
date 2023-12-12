@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Galaxy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Add New Galaxy</h1>
+    <form th:action="@{/galaxies/add}" method="post" th:object="${newGalaxy}">
+        <div class="form-group">
+            <label for="inputName">Name</label>
+            <input type="text" class="form-control" id="inputName" name="nameGalaxy" th:field="*{nameGalaxy}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Galaxy</button>
+    </form>
+    <a href="/galaxies" class="btn btn-secondary mt-3">Back to Galaxies</a>
+</div>
+
+</body>
+</html>

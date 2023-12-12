@@ -23,6 +23,6 @@ public class SatelliteController {
     public String showGalaxies(Model model) {
         List<Satellite> satellites = satelliteRepository.findAll();
         model.addAttribute("satellites", satellites);
-        return "satellite-list";
+        return "show/satellite-list";
     }
 }
