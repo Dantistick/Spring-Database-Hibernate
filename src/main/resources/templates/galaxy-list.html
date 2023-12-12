@@ -3,22 +3,92 @@
 <head>
     <title>List of Galaxies</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+        th:after {
+            content: ' \f0dc';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            padding-left: 5px;
+            opacity: 0.5;
+        }
+        th.sorted-asc:after {
+            content: ' \f0de';
+            opacity: 1;
+        }
+        th.sorted-desc:after {
+            content: ' \f0dd';
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-<h1>List of Galaxies</h1>
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="galaxy : ${galaxies}">
-        <td th:text="${galaxy.idGalaxy}"></td>
-        <td th:text="${galaxy.nameGalaxy}"></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1>List of Galaxies</h1>
+    <table class="table table-bordered table-striped" id="galaxiesTable">
+        <thead class="thead-light">
+        <tr>
+            <th class="sortable" data-column="idGalaxy">ID</th>
+            <th class="sortable" data-column="nameGalaxy">Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="galaxy : ${galaxies}">
+            <td th:text="${galaxy.idGalaxy}"></td>
+            <td th:text="${galaxy.nameGalaxy}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/" class="btn btn-primary mb-3">Back to Home</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.sortable').click(function() {
+            const table = $(this).parents('table').eq(0);
+            const rows = table.find('tr:gt(0)').toArray().sort(comparator($(this).index()));
+
+            this.asc = !this.asc;
+            if (!this.asc) {
+                rows.reverse();
+                $(this).removeClass('sorted-asc').addClass('sorted-desc');
+            } else {
+                $(this).removeClass('sorted-desc').addClass('sorted-asc');
+            }
+
+            for (let i = 0; i < rows.length; i++) {
+                table.append(rows[i]);
+            }
+        });
+    });
+
+    function comparator(index) {
+        return function(a, b) {
+            const valA = getCellValue(a, index);
+            const valB = getCellValue(b, index);
+
+            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
+        };
+    }
+
+    function getCellValue(row, index) {
+        return $(row).children('td').eq(index).text();
+    }
+</script>
 </body>
 </html>

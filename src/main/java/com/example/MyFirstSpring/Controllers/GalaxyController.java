@@ -1,4 +1,4 @@
-package com.example.MyFirstSpring;
+package com.example.MyFirstSpring.Controllers;
 
 import com.example.MyFirstSpring.entity.Galaxy;
 import org.springframework.beans.factory.annotation.Autowired;
