@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Satellite</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Add New Satellite</h1>
+    <form th:action="@{/satellites/add}" method="post" th:object="${newSatellite}">
+        <div class="form-group">
+            <label for="inputName">Name</label>
+            <input type="text" class="form-control" id="inputName" name="nameSatellite" th:field="*{nameSatellite}" required>
+        </div>
+        <div class="form-group">
+            <label for="inputRadius">Radius</label>
+            <input type="number" class="form-control" id="inputRadius" name="radiusSatellite" th:field="*{radiusSatellite}" required>
+        </div>
+        <div class="form-group">
+            <label for="inputDistance">Distance to the Planet</label>
+            <input type="number" class="form-control" id="inputDistance" name="distanceToThePlanet" th:field="*{distanceToThePlanet}" required>
+        </div>
+        <div class="form-group">
+            <label for="inputPlanetId">Planet ID</label>
+            <input type="number" class="form-control" id="inputPlanetId" name="idPlanet" th:field="*{idPlanet}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Satellite</button>
+    </form>
+    <a href="/satellites" class="btn btn-secondary mt-3">Back to Satellites</a>
+</div>
+</body>
+</html>

@@ -21,14 +21,17 @@
             <label for="inputCoreTemperature">Core Temperature</label>
             <input type="number" class="form-control" id="inputCoreTemperature" name="coreTemperature" th:field="*{coreTemperature}" required>
         </div>
-<!--        <div class="form-group">-->
-<!--            <label for="inputAtmosphere">Has Atmosphere</label>-->
-<!--            <input type="checkbox" class="form-control" id="inputAtmosphere" name="isAtmosphere" th:field="*{isAtmosphere}" required>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="inputPresenceOfLife">Presence of Life</label>-->
-<!--            <input type="checkbox" class="form-control" id="inputPresenceOfLife" name="presenceOfLife" th:field="*{presenceOfLife}" required>-->
-<!--        </div>-->
+        <div class="form-group">
+            <label for="inputAtmosphere">Has Atmosphere</label>
+            <input type="hidden" th:field="*{isAtmosphere}" />
+            <input type="checkbox" class="form-control" id="inputAtmosphere" name="isAtmosphere" th:checked="${newPlanet.isAtmosphere}" />
+        </div>
+        <div class="form-group">
+            <label for="inputPresenceOfLife">Presence of Life</label>
+            <input type="hidden" th:field="*{presenceOfLife}" />
+            <input type="checkbox" class="form-control" id="inputPresenceOfLife" name="presenceOfLife" th:checked="${newPlanet.presenceOfLife}" />
+        </div>
+
         <div class="form-group">
             <label for="inputIdGalaxy">Id Galaxy</label>
             <input type="number" class="form-control" id="inputIdGalaxy" name="idGalaxy" th:field="*{idGalaxy}" required>

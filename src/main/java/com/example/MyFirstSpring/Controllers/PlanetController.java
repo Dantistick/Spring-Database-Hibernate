@@ -35,8 +35,8 @@ public class PlanetController {
         model.addAttribute("newPlanet", newPlanet);
         model.addAttribute("radiusPlanet", newPlanet.getRadiusPlanet());
         model.addAttribute("coreTemperature", newPlanet.getCoreTemperature());
-//        model.addAttribute("isAtmosphere", newPlanet.isAtmosphere());
-//        model.addAttribute("presenceOfLife", newPlanet.isPresenceOfLife());
+        model.addAttribute("isAtmosphere", newPlanet.isAtmosphere());
+        model.addAttribute("presenceOfLife", newPlanet.isPresenceOfLife());
         model.addAttribute("idGalaxy", newPlanet.getIdGalaxy());
         return "add/planet-add";
     }

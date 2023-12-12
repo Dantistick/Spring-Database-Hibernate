@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import org.springframework.ui.Model;;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;;
 
 @Controller
 public class SatelliteController {
@@ -20,9 +22,23 @@ public class SatelliteController {
     }
 
     @GetMapping("/satellites")
-    public String showGalaxies(Model model) {
+    public String showSatellites(Model model) {
         List<Satellite> satellites = satelliteRepository.findAll();
         model.addAttribute("satellites", satellites);
         return "show/satellite-list";
+    }
+
+    @GetMapping("/satellites/add")
+    public String showAddSatelliteForm(Model model) {
+        Satellite newSatellite = new Satellite();
+        model.addAttribute("newSatellite", newSatellite);
+        // Add any other attributes related to Satellite if needed
+        return "add/satellite-add";
+    }
+
+    @PostMapping("/satellites/add")
+    public String addSatellite(@ModelAttribute Satellite satellite) {
+        satelliteRepository.save(satellite);
+        return "redirect:/satellites";
     }
 }

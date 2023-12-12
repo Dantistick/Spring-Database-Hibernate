@@ -43,5 +43,4 @@ public class Planet {
     @Basic
     @Column(name = "id_galaxy", nullable = false)
     private int idGalaxy;
-
 }
